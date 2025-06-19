@@ -10,6 +10,6 @@ def fibonacci(n):
 
 if __name__ == "__main__":
 
-    nth_term = 29
+    nth_term = 36
 
     print(f"The {nth_term}th term of the Fibonacci sequence is {fibonacci(nth_term)}")

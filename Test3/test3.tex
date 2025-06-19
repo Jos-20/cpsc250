@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb, fancyhdr, fullpage, listings, enumitem}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{fancyvrb}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.75em}
+
+\title{CPSC 250 - Programming for Data Manipulation\\Test 3}
+\date{}
+\begin{document}
+\maketitle
+
+\textbf{Instructions:} Answer all questions on this test paper. You may not use any devices. Write clearly and show your work where needed.
+
+\section*{Part 1 – Multiple Choice (10 points)}
+
+Circle the best answer. Each question is worth 2 points.
+
+\begin{enumerate}[label=\arabic*.]
+    \item What will happen if a derived class does \textbf{not} call \texttt{super().\_\_init\_\_()} in its constructor?
+    \begin{enumerate}[label=\alph*)]
+        \item The base class is automatically initialized
+        \item The base class’s constructor is ignored
+        \item Python creates a default constructor for it
+        \item It has no effect on object creation
+    \end{enumerate}
+
+    \item Which of the following is \textbf{true} about overriding methods in a derived class?
+    \begin{enumerate}[label=\alph*)]
+        \item You must use the same method name but different parameters
+        \item You must redefine all parent methods
+        \item The method in the base class is permanently deleted
+        \item The derived method replaces the base version when called from an instance
+    \end{enumerate}
+
+    \item In object-oriented programming, what is \textbf{polymorphism} most commonly used for?
+    \begin{enumerate}[label=\alph*)]
+        \item To allow different object types to respond to the same method call
+        \item To copy attributes from parent to child classes
+        \item To convert private attributes to public
+        \item To compare two unrelated types for equality
+    \end{enumerate}
+    
+    \newpage
+
+    \item Consider the following:
+
+\begin{verbatim}
+class A:
+    def speak(self):
+        return "A speaks"
+
+class B(A):
+    def speak(self):
+        return "B speaks"
+
+class C(A):
+    def speak(self):
+        return "C speaks"
+
+class D(B, C):
+    pass
+
+print(D().speak())
+\end{verbatim}
+
+What is printed?
+    \begin{enumerate}[label=\alph*)]
+        \item A speaks
+        \item B speaks
+        \item C speaks
+        \item Error due to ambiguity
+    \end{enumerate}
+
+    \item What is the main purpose of using \textbf{encapsulation} in object-oriented design?
+    \begin{enumerate}[label=\alph*)]
+        \item To allow multiple classes to inherit the same method
+        \item To ensure subclasses always override base methods
+        \item To restrict direct access to some parts of an object
+        \item To define attributes in the constructor
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\section*{Part 2 – Find the Errors (10 points)}
+
+Each question contains at least two errors related to inheritance or object design. Circle the errors and explain briefly what is wrong.
+
+\subsection*{Question 1:}
+\begin{verbatim}
+class Vehicle:
+    def __init__(self, speed):
+        speed = speed
+
+class Bike(Vehicle):
+    def __init__(self, speed, gear):
+        self.gear = gear
+\end{verbatim}
+
+\vspace{3cm}
+
+\subsection*{Question 2:}
+\begin{verbatim}
+class Tool:
+    def __init__(self, name):
+        self.name = name
+
+class Hammer(Tool):
+    def __init__(self, name, weight):
+        Tool.__init__()
+        self.weight = weight
+\end{verbatim}
+
+\vspace{3cm}
+
+\newpage
+
+\section*{Part 3 – Code Writing (30 points)}
+
+Answer each of the following questions clearly. Be sure to use correct syntax and indentation.
+
+\subsection*{1. (10 points) – Inheritance with \texttt{super()} and \texttt{\_\_str\_\_}}
+
+Write a class \texttt{Book} with attributes \texttt{title} and \texttt{author}. Then write a subclass \texttt{Textbook} that adds a \texttt{subject} attribute. Use \texttt{super()} to initialize the base class, and override \texttt{\_\_str\_\_} to return:
+
+\texttt{"Calculus by Stewart [Subject: Math]"}
+
+\vspace{6cm}
+\newpage
+
+\subsection*{2. (10 points) – \texttt{\_\_eq\_\_} and \texttt{\_\_lt\_\_}}
+
+Create a class \texttt{Movie} with attributes \texttt{title} and \texttt{rating} (a float from 0 to 10).
+
+\begin{itemize}
+    \item Override \texttt{\_\_eq\_\_} so two movies are equal if their titles match
+    \item Override \texttt{\_\_lt\_\_} so movies can be compared by rating
+\end{itemize}
+
+\vspace{6cm}
+\newpage
+
+\subsection*{3. (10 points) – Mixin + Inheritance}
+
+Write a mixin class \texttt{TimestampMixin} that defines a method \texttt{timestamp()} which prints "Logged at some time". Create a base class \texttt{Document} with an attribute \texttt{filename}. Write a class \texttt{PDFDocument} that inherits from both and includes a \texttt{print\_info()} method that prints the filename and calls \texttt{timestamp()}.
+
+\vspace{6cm}
+
+\newpage
+
+\section*{Part 4 – Comment the Code (10 points)}
+
+Write meaningful comments on the lines marked below. Don’t just rewrite the code — explain what each part is doing and why.
+
+\begin{verbatim}
+class Animal:
+    def __init__(self, species="unknown"):       # (1)
+        self._species = species
+
+    def get_species(self):                        # (2)
+        return self._species
+
+    def speak(self):                              # (3)
+        return "..."
+
+class Dog(Animal):
+    def speak(self):                              # (4)
+        return "Woof!"
+\end{verbatim}
+
+\vspace{5cm}
+
+\end{document}
