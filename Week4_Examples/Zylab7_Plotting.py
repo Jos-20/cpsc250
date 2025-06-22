@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-file = input()
+#file = input()
+file = "broadway_dec_2000.csv"  # Replace with your actual file path
 
 # TODO: Read in CSV file as a dataframe
 broadway_show_plot = pd.read_csv(file)
