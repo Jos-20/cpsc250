@@ -11,7 +11,3 @@ if __name__ == '__main__':
 
     print(root1, root2)
 
-    for x in (root1,root2):
-        f = x**4 + 1/x**4
-        print(f)
-

@@ -45,9 +45,9 @@ if __name__ == "__main__":
     plt.plot(n, elapsed_time)
     plt.xlabel('n')
     plt.ylabel('Time (s)')
-    plt.yscale('log')
+    #plt.yscale('log')
     plt.grid()
-    plt.yticks([0.000001,0.00001,0.0001, 0.001, 0.01, 0.1, 1], ['0.001ms','0.01ms','0.1ms','1ms', '10ms', '0.1s', '1s'])
+    #plt.yticks([0.000001,0.00001,0.0001, 0.001, 0.01, 0.1, 1], ['0.001ms','0.01ms','0.1ms','1ms', '10ms', '0.1s', '1s'])
     plt.title('Time Complexity of Calculating the Fibonacci Sequence using Recursion')
     plt.show()
 

@@ -2,7 +2,7 @@ import math
 
 if __name__ == '__main__':
 
-    a = 1.0
+    a = 6.0
     b = 5.0
     c = 1.0
 
