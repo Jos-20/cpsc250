@@ -22,7 +22,7 @@ y = df['y']
 X = df['x']
 
 # Step 2:  Add a constant to the independent variable
-X = sm.add_constant(X)
+#X = sm.add_constant(X)
 
 # Step 3: Ordinary Least Squares model from statsmodels
 # model is a complex object returned by the fit() method

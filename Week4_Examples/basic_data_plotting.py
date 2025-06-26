@@ -47,7 +47,7 @@ if __name__ == '__main__':
         #plt.grid(linewidth=0.5)
 
         # Make sure lower limit of y-axis is zero!
-        plt.ylim(0)
+        plt.ylim(0,100)
         plt.xlim(0)
 
         # Possibly, choose logarithmic x and/or y scales.
@@ -85,7 +85,7 @@ if __name__ == '__main__':
 
     # Step 4:  Plot the error band
 
-    plot_error_band = False
+    plot_error_band = True
 
     if plot_error_band:
         ps = np.random.multivariate_normal(popt,pcov,10000)

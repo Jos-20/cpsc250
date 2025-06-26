@@ -1,0 +1,142 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, fullpage, fancyhdr, listings, enumitem}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{fancyvrb}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\Large\bfseries}{}{0em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{CPSC 250 – Test 3 Solutions}
+\lhead{}
+\rfoot{Page \thepage}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.75em}
+
+\title{CPSC 250 - Programming for Data Manipulation\\Test 3 -- \textbf{Solution Set}}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Part 1 – Multiple Choice (10 points)}
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{b)} The base class’s constructor is ignored
+    \item \textbf{d)} The derived method replaces the base version when called from an instance
+    \item \textbf{a)} To allow different object types to respond to the same method call
+    \item \textbf{b)} B speaks
+    \item \textbf{c)} To restrict direct access to some parts of an object
+\end{enumerate}
+
+\section*{Part 2 – Find the Errors (10 points)}
+
+\subsection*{Question 1:}
+\begin{verbatim}
+class Vehicle:
+    def __init__(self, speed):
+        speed = speed   # Error: should be self.speed = speed
+
+class Bike(Vehicle):
+    def __init__(self, speed, gear):
+        self.gear = gear  # Error: base class constructor not called
+\end{verbatim}
+
+\textbf{Fix:}
+\begin{verbatim}
+class Bike(Vehicle):
+    def __init__(self, speed, gear):
+        super().__init__(speed)
+        self.gear = gear
+\end{verbatim}
+
+\subsection*{Question 2:}
+\begin{verbatim}
+class Hammer(Tool):
+    def __init__(self, name, weight):
+        Tool.__init__()    # Error: missing 'name' argument
+        self.weight = weight
+\end{verbatim}
+
+\textbf{Fix:}
+\begin{verbatim}
+class Hammer(Tool):
+    def __init__(self, name, weight):
+        super().__init__(name)
+        self.weight = weight
+\end{verbatim}
+
+\newpage
+
+\section*{Part 3 – Code Writing (30 points)}
+
+\subsection*{1. Book and Textbook Classes}
+
+\begin{verbatim}
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+class Textbook(Book):
+    def __init__(self, title, author, subject):
+        super().__init__(title, author)
+        self.subject = subject
+
+    def __str__(self):
+        return f"{self.title} by {self.author} [Subject: {self.subject}]"
+\end{verbatim}
+
+\subsection*{2. Movie Class with Comparison Operators}
+
+\begin{verbatim}
+class Movie:
+    def __init__(self, title, rating):
+        self.title = title
+        self.rating = rating
+
+    def __eq__(self, other):
+        return self.title == other.title
+
+    def __lt__(self, other):
+        return self.rating < other.rating
+\end{verbatim}
+
+\subsection*{3. Mixin and Inheritance}
+
+\begin{verbatim}
+class TimestampMixin:
+    def timestamp(self):
+        print("Logged at some time")
+
+class Document:
+    def __init__(self, filename):
+        self.filename = filename
+
+class PDFDocument(Document, TimestampMixin):
+    def print_info(self):
+        print(f"File: {self.filename}")
+        self.timestamp()
+\end{verbatim}
+
+\newpage
+
+\section*{Part 4 – Comment the Code (10 points)}
+
+\begin{verbatim}
+class Animal:
+    def __init__(self, species="unknown"):       # (1) Constructor sets species; uses a default value
+        self._species = species                  # Stored as a protected attribute
+
+    def get_species(self):                        # (2) Getter method to access species attribute
+        return self._species
+
+    def speak(self):                              # (3) Base class placeholder for sound; can be overridden
+        return "..."
+
+class Dog(Animal):
+    def speak(self):                              # (4) Overrides speak to return "Woof!" for Dog
+        return "Woof!"
+\end{verbatim}
+
+\end{document}

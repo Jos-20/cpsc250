@@ -30,7 +30,7 @@ if do_fit:
     model = model.fit()
 
     # View model summary
-    # print(model.summary())
+    print(model.summary())
 
     # Predict values
     sales_pred = model.predict()
@@ -62,6 +62,8 @@ if do_fit2:
     model2 = smf.ols('Sales_TV_Residual ~ Radio', data=advert)
     model2 = model2.fit()
 
+    print(model2.summary())
+
     sales_pred2 = model2.predict()
 
     advert['Sales_TV_Radio'] = sales_pred2
@@ -78,12 +80,14 @@ if do_plot2:
     ax[1][2].set_xlabel('Newspaper Advertising Costs')
     ax[1][2].set_ylabel('Sales vs. TV/Radio Residual')
 
-do_fit3 = True
+do_fit3 = False
 
 if do_fit3:
     # Fit a linear regression model to a single parameter - Sales_TV_Radio_Residual vs. Newspaper advertising costs
     model3 = smf.ols('Sales_TV_Radio_Residual ~ Newspaper', data=advert)
     model3 = model3.fit()
+
+    print(model3.summary())
 
     sales_pred3 = model3.predict()
 
@@ -91,14 +95,14 @@ if do_fit3:
     advert['Sales_TV_Radio_Newspaper_Residual'] = advert['Sales_TV_Radio_Residual'] - sales_pred3
     print(advert.head())
 
-do_plot3 = True
+do_plot3 = False
 
 if do_plot3:
      ax[1][2].plot(advert['Newspaper'], sales_pred3, 'o', label = "Data")  # scatter plot showing actual data
 
 
-print(model.summary())
-print(model2.summary())
-print(model3.summary())
+#print(model.summary())
+#print(model2.summary())
+#print(model3.summary())
 
 plt.show()
