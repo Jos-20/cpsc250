@@ -26,7 +26,7 @@ class TransportMode:
         self.speed = speed
 
     def display(self):
-        print(f'{self.name} can go {self.speed} mpg')
+        print(f'{self.name} can go {self.speed} mph')
 
 
 class SemiTruck(TransportMode, DrivingMixin):

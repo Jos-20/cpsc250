@@ -3,7 +3,7 @@ def f(x):
 
 
 def find_root(a, b):
-    epsilon = 1.0E-8 # tolerance for finding the root
+    epsilon = 1.0E-16 # tolerance for finding the root
     fa = f(a)
     fb = f(b)
     print(a, b, fa, fb)
