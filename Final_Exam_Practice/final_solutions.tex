@@ -1,0 +1,171 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{fancyhdr}
+\usepackage{fullpage}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{courier}
+\usepackage{float}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{CPSC 250 - Final Exam Review Solutions}
+\lhead{Programming for Data Manipulation}
+\rfoot{Page \thepage}
+
+\title{CPSC 250 - Programming for Data Manipulation \\ Final Exam Review – Solutions}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Part I: Multiple Choice (30 points)}
+
+\begin{enumerate}[label=\arabic*.]
+\item \textbf{C} – A single-element tuple must use a trailing comma: \texttt{(5,)} is a tuple.
+\item \textbf{C} – \texttt{\_\_lt\_\_} implements the less-than operator \texttt{<}.
+\item \textbf{D} – \texttt{x is y} is True because they point to the same list object.
+\item \textbf{A} – \texttt{plt.hist()} creates a histogram from data.
+\item \textbf{B} – Encapsulation hides internal state and data using private attributes.
+\item \textbf{C} – Default arguments must come after required ones.
+\item \textbf{A} – \texttt{df.loc[0]} returns the first row (as a Series).
+\item \textbf{B} – In a balanced BST, search is \texttt{O(log n)}.
+\item \textbf{B} – \texttt{OLS()} from \texttt{statsmodels.api} performs regression.
+\item \textbf{B} – The derived class method overrides the base method.
+\item \textbf{B} – Inheritance lets a class reuse code from another class.
+\item \textbf{A} – Python does not support true overloading, but default args allow flexibility.
+\item \textbf{C} – The set comprehension eliminates duplicates: \texttt{\{1, 2, 3\}}.
+\item \textbf{C} – Tuples are immutable.
+\item \textbf{C} – \texttt{np.linspace()} generates evenly spaced values.
+
+\end{enumerate}
+
+\newpage
+\section*{Part II: Error Identification (15 points)}
+
+\textbf{Original Buggy Code:}
+\begin{lstlisting}[language=Python]
+def count_words(filename):
+    with open(filename) as f:
+        words = f.read().split()
+
+    counts = {}
+    for word in words:
+        if word in counts:
+            counts[word] = 1
+        else:
+            counts[word] += 1
+
+    return counts
+\end{lstlisting}
+
+\textbf{Fixed Code:}
+\begin{lstlisting}[language=Python]
+def count_words(filename):
+    with open(filename) as f:
+        words = f.read().split()
+
+    counts = {}
+    for word in words:
+        if word in counts:
+            counts[word] += 1
+        else:
+            counts[word] = 1
+
+    return counts
+\end{lstlisting}
+
+\textbf{Explanation:}  
+The original logic reversed the update: it reset the count to 1 if the word already existed. Also, the default case incorrectly tried to increment a non-existent key.
+
+\newpage
+\section*{Part III: Code Writing (30 points)}
+
+\textbf{Q1. Recursive factorial (6 points)}
+\begin{lstlisting}[language=Python]
+def factorial(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+\end{lstlisting}
+
+---
+
+\textbf{Q2. Book class with \_\_str\_\_ (8 points)}
+\begin{lstlisting}[language=Python]
+class Book:
+    def __init__(self, title, author):
+        self.__title = title
+        self.__author = author
+
+    def __str__(self):
+        return f'"{self.__title}" by {self.__author}'
+\end{lstlisting}
+
+---
+
+\textbf{Q3. Read CSV and plot (8 points)}
+\begin{lstlisting}[language=Python]
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def read_and_plot(filename):
+    df = pd.read_csv(filename)
+    plt.scatter(df['x'], df['y'])
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.title("Scatterplot of y vs x")
+    plt.show()
+\end{lstlisting}
+
+---
+
+\textbf{Q4. Shape polymorphism (8 points)}
+\begin{lstlisting}[language=Python]
+class Shape:
+    def area(self):
+        return 0
+
+class Square(Shape):
+    def __init__(self, side):
+        self.side = side
+
+    def area(self):
+        return self.side ** 2
+
+class Triangle(Shape):
+    def __init__(self, base, height):
+        self.base = base
+        self.height = height
+
+    def area(self):
+        return 0.5 * self.base * self.height
+
+# Demonstrate polymorphism
+shapes = [Square(4), Triangle(3, 6), Square(2)]
+for s in shapes:
+    print(s.area())
+\end{lstlisting}
+
+\newpage
+\section*{Part IV: Code Comprehension + Commenting (25 points)}
+
+\textbf{Original Function:}
+\begin{lstlisting}[language=Python]
+import statsmodels.api as sm
+import pandas as pd
+
+def regress(df, yname, xnames):
+    X = df[xnames]                  # Select independent variables
+    X = sm.add_constant(X)         # Add intercept term
+    y = df[yname]                  # Select dependent variable
+    model = sm.OLS(y, X)           # Create OLS regression model
+    results = model.fit()          # Fit the model
+    print(results.summary())       # Print regression summary
+\end{lstlisting}
+
+\textbf{Explanation:}  
+This function performs a multiple linear regression using the specified dependent variable (`yname`) and a list of independent variables (`xnames`) from a DataFrame. It adds a constant term (intercept), fits the model using OLS (ordinary least squares), and prints a detailed summary with coefficients, R-squared value, and p-values.
+
+\end{document}

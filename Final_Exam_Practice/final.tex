@@ -1,0 +1,223 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{fancyhdr}
+\usepackage{fullpage}
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{courier}
+\usepackage{float}
+\usepackage{hyperref}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{CPSC 250 - Final Exam Review}
+\lhead{Programming for Data Manipulation}
+\rfoot{Page \thepage}
+
+\title{CPSC 250 - Programming for Data Manipulation\\Final Exam Review Version}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Instructions}
+You have 150 minutes. This is a closed-book, in-class review exam. You may not use ChatGPT or any programming tools. Answer clearly and legibly. Show all work.
+
+\section*{Part I: Multiple Choice (30 points, 2 points each)}
+Circle the best answer.
+
+\begin{enumerate}[label=\arabic*.]
+
+\item What is the output of the expression \texttt{type((5,))} in Python?  
+\begin{enumerate}[label=\Alph*.]
+\item \texttt{int}
+\item \texttt{list}
+\item \texttt{tuple}
+\item \texttt{set}
+\end{enumerate}
+
+\item What does the \texttt{\_\_lt\_\_} method define for a class?  
+\begin{enumerate}[label=\Alph*.]
+\item Equality
+\item String conversion
+\item Less-than comparison
+\item Logical negation
+\end{enumerate}
+
+\item Given \texttt{x = [1, 2, 3]} and \texttt{y = x}, which statement is true?  
+\begin{enumerate}[label=\Alph*.]
+\item \texttt{x} and \texttt{y} refer to different lists
+\item \texttt{y} is a shallow copy of \texttt{x}
+\item \texttt{x == y} is False
+\item \texttt{x is y} is True
+\end{enumerate}
+
+\item What does \texttt{plt.hist(data)} do?  
+\begin{enumerate}[label=\Alph*.]
+\item Plots a histogram of \texttt{data}
+\item Computes the mean of \texttt{data}
+\item Sorts \texttt{data}
+\item Removes outliers from \texttt{data}
+\end{enumerate}
+
+\item What is encapsulation in OOP?  
+\begin{enumerate}[label=\Alph*.]
+\item Storing data in lists
+\item Restricting access to internal object details
+\item Using recursion inside a class
+\item Replacing operators like \texttt{+} and \texttt{==}
+\end{enumerate}
+
+\item Which of the following is true about default arguments in Python functions?  
+\begin{enumerate}[label=\Alph*.]
+\item Mutable defaults like lists are always safe to use  
+\item Default values are evaluated each time the function is called  
+\item Default arguments must appear after non-default ones  
+\item You cannot use keyword arguments with default values  
+\end{enumerate}
+
+\item What does \texttt{df.loc[0]} return for a DataFrame \texttt{df}?  
+\begin{enumerate}[label=\Alph*.]
+\item First row
+\item First column
+\item First value
+\item Column names
+\end{enumerate}
+
+\item In binary search trees, what is the time complexity of search in a balanced tree?  
+\begin{enumerate}[label=\Alph*.]
+\item \texttt{O(1)}
+\item \texttt{O(log n)}
+\item \texttt{O(n)}
+\item \texttt{O(n log n)}
+\end{enumerate}
+
+\item Which method from \texttt{statsmodels.api} is used to perform OLS regression?  
+\begin{enumerate}[label=\Alph*.]
+\item \texttt{lm()}
+\item \texttt{OLS()}
+\item \texttt{linreg()}
+\item \texttt{curve\_fit()}
+\end{enumerate}
+
+\item What happens if a base class method is overridden in a derived class?  
+\begin{enumerate}[label=\Alph*.]
+\item The base class method runs first  
+\item The derived method replaces the base version  
+\item The method becomes private  
+\item Python raises an error  
+\end{enumerate}
+
+\item Which of the following best describes inheritance in Python?  
+\begin{enumerate}[label=\Alph*.]
+\item Classes cannot inherit from multiple parents  
+\item Inheritance allows one class to reuse code from another  
+\item Derived classes must override all methods  
+\item Only abstract classes can be inherited  
+\end{enumerate}
+
+\item Which of the following best describes method overloading in Python?  
+\begin{enumerate}[label=\Alph*.]
+\item Not supported directly, but can be simulated with default arguments  
+\item Multiple methods with the same name are allowed  
+\item Python only allows one constructor  
+\item You must use decorators for it to work  
+\end{enumerate}
+
+\item What does the following expression return?  
+\texttt{\{x for x in [1, 2, 2, 3, 3, 3]\}}  
+\begin{enumerate}[label=\Alph*.]
+\item \texttt{[1, 2, 3]}
+\item \texttt{\{1, 2, 2, 3, 3, 3\}}
+\item \texttt{\{1, 2, 3\}}
+\item A list of tuples
+\end{enumerate}
+
+\item Which of the following is true about tuples in Python?  
+\begin{enumerate}[label=\Alph*.]
+\item They are mutable  
+\item They are slower than lists  
+\item They are immutable  
+\item They cannot be nested  
+\end{enumerate}
+
+\item What is the primary use of \texttt{np.linspace()}?  
+\begin{enumerate}[label=\Alph*.]
+\item Count elements in a list  
+\item Sort an array  
+\item Create a sequence of evenly spaced values  
+\item Generate random numbers  
+\end{enumerate}
+
+\end{enumerate}
+
+\newpage
+\section*{Part II: Error Identification (15 points)}
+
+The following code is intended to create a dictionary mapping each unique word in a file to the number of times it appears. Find and correct all errors.
+
+\begin{lstlisting}[language=Python]
+def count_words(filename):
+    with open(filename) as f:
+        words = f.read().split()
+
+    counts = {}
+    for word in words:
+        if word in counts:
+            counts[word] = 1
+        else:
+            counts[word] += 1
+
+    return counts
+\end{lstlisting}
+
+\vspace{3in} % space for writing
+
+\newpage
+\section*{Part III: Code Writing (30 points)}
+
+\textbf{Q1. (6 points)}  
+Write a function \texttt{factorial(n)} that uses recursion to compute \texttt{n!}.
+
+\vspace{2in}
+
+\textbf{Q2. (8 points)}  
+Write a class \texttt{Book} with private fields for \texttt{title} and \texttt{author}, and a \texttt{\_\_str\_\_} method that returns \texttt{"<title>" by <author>}.
+
+\vspace{2.5in}
+
+\textbf{Q3. (8 points)}  
+Write a function \texttt{read\_and\_plot(filename)} that reads a CSV file with columns \texttt{x} and \texttt{y} and produces a scatterplot using matplotlib.
+
+\vspace{2.5in}
+
+\textbf{Q4. (8 points)}  
+Write a base class \texttt{Shape} with a method \texttt{area()} that returns 0. Then write derived classes \texttt{Square} and \texttt{Triangle}, each with their own constructor and overridden \texttt{area()} method. Demonstrate polymorphism using a list of \texttt{Shape} objects.
+
+\vspace{3in}
+
+\newpage
+\section*{Part IV: Code Comprehension + Commenting (25 points)}
+
+The following function is meant to perform simple multi-variable regression using \texttt{statsmodels}. Add comments explaining each line and describe what this code is doing.
+
+\begin{lstlisting}[language=Python]
+import statsmodels.api as sm
+import pandas as pd
+
+def regress(df, yname, xnames):
+    X = df[xnames]
+    X = sm.add_constant(X)
+    y = df[yname]
+    model = sm.OLS(y, X)
+    results = model.fit()
+    print(results.summary())
+\end{lstlisting}
+
+\vspace{3.5in}
+
+\textbf{What does the function output represent?}
+
+\vspace{1.5in}
+
+\end{document}
